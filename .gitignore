@@ -30,3 +30,16 @@ proguard/
 
 # Android Studio captures folder
 captures/
+.metadata/
+.recommenders/caches/identified-project-coordinates.json
+.recommenders/caches/manual-mappings.json
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.fdt
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.fdx
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.fnm
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.frq
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.nrm
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.prx
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.tii
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/_i.tis
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/segments.gen
+.recommenders/index/http___download_eclipse_org_recommenders_models_mars_/segments_j

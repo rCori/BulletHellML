@@ -1,0 +1,122 @@
+5/14/16
+I have been trying to make a small bullet hell thing for android after someone told me about this awsome utility
+called bulletML. I decided to try to learn how to use this as well as AndEngine. AndEngine seems not too hard to
+grasp, but bulletML sure does come with a ton of files. It also comes with a java applet to act as a demonstration.
+I got that applet to run, and now I am trying to decompose everything about bulletML to make it work with my
+Android thing. There are two parts to this: The source code and the markup. BulletML is a markup language for
+defining intricate bullet patterns in STG games. So the reference materials on the website go over how the markup
+works just fine, but not how to actually parse it. All the java code to do that parsing exists, that just isn't
+explained(or I am dense and not getting it). Anyway, if you want to look at this thing for yourself the website
+is here: http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html. I should also note that this was adapted
+into a unity plugin which I ahve to imagine is a while hell of a lot easier to use, but what the heck lets try
+just doing it like this.
+
+Packages:
+bulletml:
+I think this is the main engine, the rest is for demonstration
+There seems to be a class for each xml attributre except term and times
+Many of these classes seem to be generated from Relaxer. Relaxer is some sort xml compiler that turns xml into
+a Java class. Number of different constructors from no arguments to Strings, Readers, and Documents. The function
+setup gets used in many of them, taking the same parameter. Setup with an Element argument(which it eventually tries
+to get to) will call Init with that Element. Init(Element) is where things start happening.It makes heavy use of a 
+class called RStack which appears to just be a stack that takes elements. It also calls declareNamespace on
+something called a RNSContext. Not sure what that does, but it's a member of this class. So is label, the name of
+the Fire in the xml. That gets assigned here using a static function in the URelaxer class.
+but our namespace it fille 
+RStack: A stack of elements.
+bulletml_demo:
+bulletml_demo.noiz:
+
+
+Markup:
+Some examples may come from Progear_round1_boss_grow_bullets.xml
+<bulletml>: define if the bullet is for a vertical or horizontal shooter. Contains   <bullet>, <action>, and <fire>
+tags
+
+<bullet>: Bullets have a direction, spped, and actions.Give the bullet a label. Labels are used to reference
+bullets in <bulletRef>s. EX <bullet label="seed"/> May contain <direction>, <speed>,<action>, and <actionRef>
+
+<action>: There are many actions a bullet can have such as changeSpeed, wait, repeat, etc. These will all go into
+this tag. This also gets a string label attribute EX : <action label="top">
+
+The following are actions:
+<fire>: Must supply a <direction> and <speed> to fire a bullet in.
+
+<changeDirection>: Change direction be specifiying degrees and in how many frames
+
+<changeSpeed>: Change speed by specifying speed level and in how many frames. Example:
+<changeSpeed>
+  <speed>0</speed>
+  <term>60</term>
+</changeSpeed>
+
+<accel>: Accelerate a bullet in terms of horizontal and cvertical component. Specify how many frames.
+
+<wait>: wait for specific number of frames.
+
+<vanish>: Docs say: "Vanishes a bullet" whatever that means.
+
+<repeat>: you can make a set of actions repeat a number of times. An example that will fire 4 new bullets at 0.15
+speed:
+<repeat><times>4</times>
+<action>
+  <fire>
+    <speed type="sequence">0.15</speed>
+    <bullet/>
+  </fire>
+</action>
+</repeat>
+
+<direction>: This gives you a number of options to alter the direction of the bullet. With the aim option the bullet
+can turn relative to the direction of the player ship(I think I understand that correctly). Absolute lets you supply
+a specific amount of degrees clockwise. Relative option will turn relative to the current angle of the bullet.
+Sequence is a little more confusing to me. I think it means that the direction is relative to the last bullet
+fired.
+
+<speed>: You can supply an absolute or relative speed for the bullet. Options are like <direction> for absolute,
+relative, or sequence. No aim because what would that be?
+
+<horizontal>: Acceleration but only for the horizontal component. I guess this ignores direction? Options are
+like speed.
+
+<vertical>: see <horizontal>, only it's vertical.
+
+<term>: Many actions contain a number that must be specified as a <term>. See <changeSpeed> for an example.
+
+<times>: Used in repeat to specify how many times you repeat. See that example.
+
+<bulletRef>: Reference to the bullet itself. Use a label to refer to the bullet by name. Parameter can be given
+by <param> to replace bullet parameters.
+
+<actionRef>: Refers to an action by name. Can do same thing with parameters as bulletRef.
+
+<fireRef>: Refers to a fire action specifically by name. I'm unsure what the difference between a bullet and a fire
+are.
+
+<param>: Unsure what a parameter is in contect.
+
+
+$rank: constant based on games difficulty.
+
+Still tryin to integrate bulletML in. It resolves and I have a bullet on the screen but it doesn't move.
+I need to implement a doucment builder because otherwise the xml can't load.
+
+Simple xml string of "<foo />" was able to be parsed successfully. Maybe I need to change up the Bulletml sample
+to make it readable. I should also probably read up on SAX and DTD and Relaxer are.
+
+So Noiz.java, the demo, initializes the BulletML differently.
+It calls gameManager.loadBulletML(String, TextArea);
+
+On android, DoucmentBuilder's cannot validate. If they try to an exception is automatically thrown.
+
+I think maybe I got the xml loading at least.
+
+I got the xml loading. the bullets shoot only once. I don't know how to get them to repeat.
+
+A player sprite can move on the screen. That's cool I found a timer thing in the original demo. Timer timerTrd.
+I think I need usage of that in order to make the bullet shooting repeat.
+That got bullets to repeat.
+calling Start made gameWakeUp happen on a different thread. We don't want to do that. We want the game activity
+update loop to do that for us. That is already set up for us we should use it. Taking the code from gameWakeUp
+and adapting it for the update() function
+The move() function needs to work on a factor of time since last update loop, not past frames.
