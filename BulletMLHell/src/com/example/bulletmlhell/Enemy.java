@@ -34,6 +34,7 @@ public class Enemy {
 		 this.height = enemySprite.getHeight();
 		 this.mx = enemySprite.getX();
 		 this.my = enemySprite.getY();
+		 health = 8000;
 	}
 	
 	public float GetHealth() {

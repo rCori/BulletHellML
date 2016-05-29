@@ -98,7 +98,7 @@ public class BulletManager {
 	public int xp, yp;
 	private int pxp, pyp;
 
-	void startGame() {
+	public void startGame() {
 		Log.i("screen", "startGame");
 		xp = playerPosX;
 		yp = playerPosY;

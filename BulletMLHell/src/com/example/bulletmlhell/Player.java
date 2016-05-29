@@ -58,12 +58,14 @@ public class Player {
 		shootCounter += elapsedSeconds;
 		if(shootCounter > SHOOT_TIME_LIMIT) {
 			shootCounter = 0.0f;
-			for(PlayerBullet bullet : playerBullets) {
-				if(!bullet.GetExists()) {
-					bullet.SetExists();
-					bullet.mx = mx;
-					bullet.my = my;
-					break;
+			if(!GetIsHit()) {
+				for(PlayerBullet bullet : playerBullets) {
+					if(!bullet.GetExists()) {
+						bullet.SetExists();
+						bullet.mx = mx;
+						bullet.my = my;
+						break;
+					}
 				}
 			}
 		}
