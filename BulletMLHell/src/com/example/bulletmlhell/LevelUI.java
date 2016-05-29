@@ -42,7 +42,7 @@ public class LevelUI {
 	private void UpdateTimeElapsedUI(float timeElapsed) {
 		this.timeElapsed = timeElapsed;
 		if(this.timeElapsedText != null) {
-			this.timeElapsedText.setText("Time: " + timeElapsed);
+			this.timeElapsedText.setText("Time: " + Math.round(timeElapsed*100.0)/100.0);
 		}
 	}
 	

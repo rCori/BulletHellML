@@ -46,7 +46,8 @@ public class BulletImpl {
 		textureRegion = mBulletTextureRegion;
 		gameManager = gameManager2;
 		x = NOT_EXIST;
-
+		px = -20.0f;
+		py = -20.0f;
 	}
 
 	public float getAimDeg() {

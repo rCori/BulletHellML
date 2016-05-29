@@ -159,7 +159,7 @@ public class SceneManager implements IUpdateHandler,IOnSceneTouchListener {
 			backgroundTexture.load();
 			this.mBackgroundTextureRegion = TextureRegionFactory.extractFromTexture(backgroundTexture);
 			font = FontFactory.createFromAsset(activity.getEngine().getFontManager(), activity.getEngine().getTextureManager(), 256, 256, activity.getAssets(),
-				    "fonts/Retro_Computer_DEMO.ttf", 24, true, android.graphics.Color.WHITE);
+				    "fonts/Retro_Computer_DEMO.ttf", 30, true, android.graphics.Color.WHITE);
 			font.load();
 		} catch(IOException e) {
 			Debug.e(e);
@@ -225,7 +225,7 @@ public class SceneManager implements IUpdateHandler,IOnSceneTouchListener {
 	    player.SetPosition(centerX, centerY);
 	    
 	    for(PlayerBullet playerBullet : player.playerBullets) {
-	    	Sprite playerBulletSprite = new Sprite(-1.0f, -1.0f, this.mPlayerBulletTextureRegion, activity.getVertexBufferObjectManager());
+	    	Sprite playerBulletSprite = new Sprite(playerBullet.mx, playerBullet.my, this.mPlayerBulletTextureRegion, activity.getVertexBufferObjectManager());
 	    	gameScene.attachChild(playerBulletSprite);
 	    	playerBullet.SetSprite(playerBulletSprite);
 	    }
@@ -251,10 +251,10 @@ public class SceneManager implements IUpdateHandler,IOnSceneTouchListener {
 		Sprite backgroundSprite = new Sprite(0,0, this.mBackgroundTextureRegion, activity.getVertexBufferObjectManager());
 		resultScene.attachChild(backgroundSprite);
 		
-		Text timeElapsedText = new Text(50f,50f,font, "Your Time: " + currentTime , activity.getVertexBufferObjectManager());
+		Text timeElapsedText = new Text(80f,200f,font, "Your Time: " + Math.round(currentTime*100.0)/100.0 , activity.getVertexBufferObjectManager());
 		resultScene.attachChild(timeElapsedText);
 		
-		Text restartText = new Text(50f,400f,font, "Tap screen to restart" , activity.getVertexBufferObjectManager());
+		Text restartText = new Text(130f,400f,font, "Tap screen\n to restart" , activity.getVertexBufferObjectManager());
 		resultScene.attachChild(restartText);
 		
 		currentTime = 0.0f;
