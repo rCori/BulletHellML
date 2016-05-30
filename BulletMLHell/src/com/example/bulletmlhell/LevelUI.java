@@ -49,7 +49,7 @@ public class LevelUI {
 	private void UpdateEnemyHealth(float enemyHealthRemaining) {
 		this.enemyHealthRemaining = enemyHealthRemaining;
 		if(this.enemyHealthRemainingText != null) {
-			this.enemyHealthRemainingText.setText("Health: " + enemyHealthRemaining);
+			this.enemyHealthRemainingText.setText("Health: " + Math.round(enemyHealthRemaining));
 		}
 	}
 	

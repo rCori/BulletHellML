@@ -91,4 +91,18 @@ public class Player {
 		return isHit;
 	}
 	
+	public void MovementConstraint() {
+		if(mx > GameActivity.CAMERA_WIDTH - (playerSprite.getWidth())) {
+			mx = GameActivity.CAMERA_WIDTH - (playerSprite.getWidth());
+		} else if(mx < 0) {
+			mx = 0;
+		}
+		
+		if(my > GameActivity.CAMERA_HEIGHT - (playerSprite.getHeight())) {
+			my = GameActivity.CAMERA_HEIGHT - (playerSprite.getHeight());
+		} else if(my < 0) {
+			my = 0;
+		}
+	}
+	
 }

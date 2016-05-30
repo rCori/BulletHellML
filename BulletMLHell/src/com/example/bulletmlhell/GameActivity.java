@@ -12,7 +12,6 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.ui.activity.BaseGameActivity;
 
-import com.example.bulletmlhell.scenemanagement.GameScene;
 import com.example.bulletmlhell.scenemanagement.SceneManager;
 import com.example.bulletmlhell.scenemanagement.SceneManager.AllScenes;
 
@@ -20,7 +19,6 @@ public class GameActivity extends BaseGameActivity {
 
 	public static int CAMERA_WIDTH = 480;
 	public static int CAMERA_HEIGHT = 800;
-
 	
 	//For the new SceneManager stuff
 	private SceneManager sceneManager;

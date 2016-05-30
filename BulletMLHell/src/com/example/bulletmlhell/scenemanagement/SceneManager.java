@@ -167,8 +167,7 @@ public class SceneManager implements IUpdateHandler,IOnSceneTouchListener {
 	}
 	
 	public Scene createSplashScene() {
-		splashScene = new SplashScene(activity,engine,camera,this);
-		splashScene.setBackground(new Background(1,1,1));
+		splashScene = new Scene();
 		Sprite icon = new Sprite(0,0,this.mSplashScreenTextureRegion, activity.getVertexBufferObjectManager());
 		splashScene.attachChild(icon);
 		return splashScene;
@@ -360,6 +359,7 @@ public class SceneManager implements IUpdateHandler,IOnSceneTouchListener {
 					if(player != null) {
 						player.mx = X;
 						player.my = Y;
+						player.MovementConstraint();
 					}
 				}
 				lastEventX = pSceneTouchEvent.getX();
